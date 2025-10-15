@@ -8,7 +8,7 @@ export function flattenValidationErrors(
   for (const error of errors) {
     const key = parentPath ? `${parentPath}.${error.property}` : error.property;
     if (error.constraints) {
-      error[key] = Object.values(error.constraints);
+      errorsMap[key] = Object.values(error.constraints);
     }
 
     if (error.children && error.children.length) {
