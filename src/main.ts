@@ -7,7 +7,6 @@ import { flattenValidationErrors } from './shared';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { APP_CONFIG_NAME, LoggerFactory } from './infrastracture';
-import * as fs from 'fs';
 
 async function bootstrap() {
   const loggerInstance = LoggerFactory.create('freight-tracker');
@@ -46,8 +45,6 @@ async function bootstrap() {
 
   const configService = app.get(ConfigService);
   const { port } = configService.get(APP_CONFIG_NAME);
-
-  fs.writeFileSync('./swagger-spec.json', JSON.stringify(document));
 
   await app.listen(port);
 }

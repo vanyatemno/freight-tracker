@@ -21,7 +21,8 @@
     "db:generate": "npx prisma generate",
     "db:migrate": "npx prisma migrate dev --schema prisma/schema.prisma",
     "db:deploy": "npx prisma migrate deploy --schema prisma/schema.prisma",
-    "db:seed": "ts-node prisma/seed.ts"
+    "db:seed": "ts-node prisma/seed.ts",
+    "prepare": "husky"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -54,6 +55,7 @@
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.5.4",
     "globals": "^16.0.0",
+    "husky": "^9.1.7",
     "jest": "^30.0.0",
     "prettier": "^3.4.2",
     "prisma": "^6.17.1",
