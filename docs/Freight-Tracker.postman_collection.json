@@ -1,10 +1,11 @@
 {
 	"info": {
-		"_postman_id": "577d4af5-8ad9-4b55-ba58-b8f9586089b9",
+		"_postman_id": "4802dc9c-32a7-4e1d-b3db-2ac0445d6c6d",
 		"name": "Freight-Tracker",
-		"description": "Freight-Tracker API documentation",
+		"description": "[Freight-Tracker](https://github.com/vanyatemno/freight-tracker) API documentation.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "30818930"
+		"_exporter_id": "30818930",
+		"_collection_link": "https://www.postman.com/dark-zodiac-957480/freight-tracker/collection/ennfsec/freight-tracker?action=share&source=collection_link&creator=30818930"
 	},
 	"item": [
 		{
@@ -50,7 +51,7 @@
 										}
 									]
 								},
-								"description": "Finds the carrier by its ID. If no carrier is found responses with status code 500."
+								"description": "Finds the carrier by its ID.\n\nIf no carrier is found responses with status code 500."
 							},
 							"response": [
 								{
@@ -192,7 +193,7 @@
 										}
 									]
 								},
-								"description": "Updates the carrier info. If the carrier is fulfilling an order at the moment of request, returns status code 400."
+								"description": "Updates the carrier info.\n\nIf the carrier is fulfilling an order at the moment of request, returns status code 400."
 							},
 							"response": [
 								{
@@ -883,7 +884,7 @@
 												}
 											]
 										},
-										"description": "Assignes carrier to the route. If the carrier is fulifilling another order, responds with status code 400."
+										"description": "Assignes carrier to the route.\n\nIf the carrier is fulifilling another order or one is already assigned to the route, responds with status code 400."
 									},
 									"response": [
 										{
@@ -1119,7 +1120,7 @@
 												}
 											]
 										},
-										"description": "Updates status of the route and departure or completion time. If the route is already completed, responds with the statuc code 400."
+										"description": "Updates status of the route and departure or completion time.\n\nIf the route is already completed, responds with the statuc code 400."
 									},
 									"response": [
 										{
@@ -1337,7 +1338,7 @@
 										}
 									]
 								},
-								"description": "Finds the route by its ID, provides info on its carrier too. IF the route is not found, responds with status code 404."
+								"description": "Finds the route by its ID, provides info on its carrier too.\n\nIf the route is not found, responds with status code 404."
 							},
 							"response": [
 								{
@@ -2016,7 +2017,8 @@
 							"path": [
 								"routes"
 							]
-						}
+						},
+						"description": "This POST request to the /routes endpoint is used to create a new route for freight transportation. The request body expects a JSON object containing the startPoint and endPoint coordinates (latitude and longitude), departureDate and completionDate timestamps, requiredCarrierType specifying the type of carrier needed (e.g., BOX), and pricing details including price and currency. This endpoint helps in scheduling and pricing freight routes between specified locations within given time frames."
 					},
 					"response": [
 						{
@@ -2219,10 +2221,48 @@
 			]
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{apiKey}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
 			"key": "baseUrl",
 			"value": "/"
+		},
+		{
+			"key": "apiKey",
+			"value": ""
 		}
 	]
 }

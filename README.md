@@ -97,7 +97,7 @@ The database schema is defined using Prisma and consists of two main models: `Ca
     -   `id`: Unique identifier for the route.
     -   `startPoint`: The starting location of the route.
     -   `endPoint`: The destination of the route.
-    -   `distance`: The total distance of the route in kilometers.
+    -   `distance`: The total distance of the route in meters.
     -   `requiredCarrierType`: The specific type of carrier required for this route.
     -   `status`: The current status of the route (`AWAITING_DISPATCH`, `IN_PROGRESS`, `COMPLETED`).
     -   `price`: The price offered for completing the route.
@@ -107,6 +107,13 @@ The database schema is defined using Prisma and consists of two main models: `Ca
     -   `departureDateActual`: The actual departure date and time.
     -   `completionDateActual`: The actual completion date and time.
     -   `carrier`: A relation to the `Carrier` model, representing the carrier assigned to the route.
+
+### API Documentation
+
+The API is documented using Swagger and Postman.
+
+-   **Swagger UI**: The interactive API documentation can be accessed at the `/openapi` endpoint.
+-   **Postman Collection**: A Postman collection is available in the `./docs` folder for easy testing of the API endpoints.
 
 ## Main Business Logic
 
