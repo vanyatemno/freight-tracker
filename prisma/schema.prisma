@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum CarrierType {
+  MINI
+  BOX
+  FLAT
+  REFRIGERATED
+  TANKER
+}
+
+enum CarrierStatus {
+  AVAILABLE
+  BUSY
+}
+
+enum RouteStatus {
+  AWAITING_DISPATCH
+  IN_PROGRESS
+  COMPLETED
+}
+
+model Carrier {
+  id               String        @id @default(uuid())
+  licensePlate     String        @unique @map("license_plate")
+  model            String
+  type             CarrierType
+  registrationDate DateTime      @map("registration_date")
+  status           CarrierStatus @default(AVAILABLE)
+  rate             Decimal       @db.Decimal(10, 2)
+
+  routes Route[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([type])
+  @@map("carriers")
+}
+
+model Route {
+  id                   String      @id @default(uuid())
+  startPoint           String      @map("start_point")
+  endPoint             String      @map("end_point")
+  distance             Decimal     @db.Decimal(10, 2)
+  requiredCarrierType  CarrierType @map("required_carrier_type")
+  status               RouteStatus @default(AWAITING_DISPATCH)
+  price                Decimal     @db.Decimal(10, 2)
+  carrierFee           Decimal?    @map("carrier_fee") @db.Decimal(10, 2)
+  departureDate        DateTime    @map("departure_date")
+  completionDate       DateTime    @map("completion_date")
+  departureDateActual  DateTime?   @map("departure_date_actual")
+  completionDateActual DateTime?   @map("completion_date_actual")
+
+  carrierId String?  @map("carrier_id")
+  carrier   Carrier? @relation(fields: [carrierId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([departureDate])
+  @@index([carrierId])
+  @@map("routes")
+}
