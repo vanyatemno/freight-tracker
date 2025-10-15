@@ -34,23 +34,6 @@ export class RouteBadRequestException {
   error: string;
 }
 
-export class CarrierNotAvailableException {
-  @ApiProperty({
-    example: 400,
-  })
-  statusCode: number;
-
-  @ApiProperty({
-    example: 'Carrier is not available at the moment',
-  })
-  message: string;
-
-  @ApiProperty({
-    example: 'Bad Request',
-  })
-  error: string;
-}
-
 export class CarrierAlreadyAssignedException {
   @ApiProperty({
     example: 400,

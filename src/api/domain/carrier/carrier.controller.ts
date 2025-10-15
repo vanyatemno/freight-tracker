@@ -39,8 +39,7 @@ export class CarrierController {
 
   @Get('/')
   @ApiOperation({
-    summary:
-      'Returns a paginated list of carriers. Allows filtering by status and searching by model or license plate.',
+    summary: 'Get paginated carriers',
   })
   @ApiOkResponse({
     description: 'Returns a paginated list of carriers',
@@ -52,7 +51,7 @@ export class CarrierController {
 
   @Get('/:id')
   @ApiOperation({
-    summary: 'Returns a single carrier by its unique identifier.',
+    summary: 'Get carrier by ID',
   })
   @ApiOkResponse({
     description: 'Returns a carrier by ID',
@@ -68,8 +67,7 @@ export class CarrierController {
 
   @Post('/')
   @ApiOperation({
-    summary:
-      'Creates a new carrier. The provided rate is converted to EUR. A carrier with the same license plate cannot be created twice.',
+    summary: 'Crate a new carrier',
   })
   @ApiCreatedResponse({
     description: 'Carrier created successfully',
@@ -85,8 +83,7 @@ export class CarrierController {
 
   @Put('/:id')
   @ApiOperation({
-    summary:
-      "Updates an existing carrier. It's not possible to update a carrier that is currently fulfilling an order (status is BUSY). If the rate is updated, the currency must be provided, and the rate will be converted to EUR.",
+    summary: 'Create a carrier',
   })
   @ApiOkResponse({
     description: 'Carrier updated successfully',
@@ -112,7 +109,7 @@ export class CarrierController {
   }
 
   @Delete('/:id')
-  @ApiOperation({ summary: 'Deletes a carrier by its unique identifier.' })
+  @ApiOperation({ summary: 'Delete carrier' })
   @ApiOkResponse({
     description: 'Carrier deleted successfully',
     type: CarrierResponseDto,

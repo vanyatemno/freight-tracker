@@ -12,6 +12,7 @@ import {
 } from '@nestjs/common';
 import { RouteService } from './route.service';
 import {
+  CarrierAlreadyAssignedException,
   CreateRouteRequestDto,
   GetRoutesRequestDto,
   GetRoutesResponseDto,
@@ -43,6 +44,9 @@ export class RouteController {
   constructor(private readonly routeService: RouteService) {}
 
   @Get()
+  @ApiOperation({
+    summary: 'Get paginated routes',
+  })
   @ApiOkResponse({
     description: 'Returns a paginated list of routes',
     type: GetRoutesResponseDto,
@@ -56,6 +60,9 @@ export class RouteController {
   }
 
   @Get('/:id')
+  @ApiOperation({
+    summary: 'Find route by ID with assigned carrier if present',
+  })
   @ApiOkResponse({
     description: 'Returns a route by ID',
     type: RouteResponseDto,
@@ -69,6 +76,9 @@ export class RouteController {
   }
 
   @Post()
+  @ApiOperation({
+    summary: 'Create a route',
+  })
   @ApiCreatedResponse({
     description: 'Route created successfully',
     type: RouteResponseDto,
@@ -80,10 +90,6 @@ export class RouteController {
   })
   @ApiInternalServerErrorResponse({
     description: 'The distance between the coordinates can not be calculated',
-  })
-  @ApiNotFoundResponse({
-    description: 'Carrier not found',
-    type: RouteNotFoundException,
   })
   async create(@Body() body: CreateRouteRequestDto) {
     return this.routeService.create(body);
@@ -115,7 +121,7 @@ export class RouteController {
 
   @Put(':id/carrier')
   @ApiOperation({
-    description: 'Assign carrier to the route',
+    summary: 'Assign carrier to the route',
   })
   @ApiOperation({
     description: 'Sets carrier for the route',
@@ -129,8 +135,8 @@ export class RouteController {
     type: RouteNotFoundException,
   })
   @ApiBadRequestResponse({
-    description: 'Carrier is not available or is already set',
-    type: RouteBadRequestException,
+    description: 'Carrier has been already assigned to this route',
+    type: CarrierAlreadyAssignedException,
   })
   async setCarrier(
     @Param() { id: routeId }: SetRouteCarrierDto.SetRouteCarrierParam,
@@ -141,7 +147,7 @@ export class RouteController {
 
   @Put(':id/status')
   @ApiOperation({
-    description: 'Update route status',
+    summary: 'Update route status',
   })
   @ApiOkResponse({
     description: 'Route updated successfully',
